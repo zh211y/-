@@ -1,0 +1,12 @@
+{
+  "name": "traffic-admin-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static frontend for the traffic competition admin system.",
+  "scripts": {
+    "build": "node scripts/build-static.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
