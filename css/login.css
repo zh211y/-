@@ -8,7 +8,7 @@
 /* 登录页整体背景 */
 .login-page {
     position: relative;
-    overflow: hidden;
+    overflow-x: hidden;
     min-height: 100vh;
     background: url("../uploads/登录页图.jpg") center / cover no-repeat;
     color: #fff;
@@ -176,6 +176,7 @@
 
 .input-box input {
     flex: 1;
+    min-width: 0;
     border: 0;
     outline: none;
     font-size: 15px;
@@ -293,4 +294,143 @@
 
 .login-footer div:last-child {
     text-align: right;
+}
+
+@media (max-width: 1100px) {
+    .login-page {
+        min-height: 100vh;
+        padding: 42px 24px 28px;
+    }
+
+    .login-brand {
+        padding: 0;
+        gap: 16px;
+    }
+
+    .login-brand img {
+        width: 58px;
+        height: 58px;
+        flex: 0 0 auto;
+    }
+
+    .login-brand h1 {
+        font-size: 24px;
+        line-height: 34px;
+        word-break: break-word;
+    }
+
+    .login-slogan {
+        width: min(100%, 680px);
+        margin: 46px 0 0;
+    }
+
+    .login-slogan h2 {
+        font-size: 34px;
+        line-height: 1.35;
+        word-break: break-word;
+    }
+
+    .login-slogan > p {
+        margin-top: 18px;
+    }
+
+    .login-card {
+        position: relative;
+        top: auto;
+        left: auto;
+        width: min(100%, 450px);
+        margin: 34px auto 0;
+        transform: none;
+    }
+
+    .login-footer {
+        position: relative;
+        left: auto;
+        right: auto;
+        bottom: auto;
+        margin-top: 28px;
+        gap: 18px;
+        flex-wrap: wrap;
+    }
+
+    .login-footer div:last-child {
+        text-align: left;
+    }
+}
+
+@media (max-width: 620px) {
+    .login-page {
+        padding: 24px 14px 20px;
+    }
+
+    .login-brand {
+        align-items: flex-start;
+    }
+
+    .login-brand img {
+        width: 46px;
+        height: 46px;
+    }
+
+    .login-brand h1 {
+        font-size: 19px;
+        line-height: 28px;
+    }
+
+    .login-brand p {
+        font-size: 14px;
+    }
+
+    .login-slogan {
+        margin-top: 32px;
+    }
+
+    .login-slogan h2 {
+        font-size: 26px;
+    }
+
+    .login-slogan > p {
+        font-size: 15px;
+        line-height: 26px;
+    }
+
+    .login-slogan ul {
+        margin-top: 26px;
+    }
+
+    .login-slogan li {
+        align-items: flex-start;
+        gap: 14px;
+        margin-bottom: 18px;
+    }
+
+    .round-icon {
+        flex: 0 0 46px;
+        width: 46px;
+        height: 46px;
+        line-height: 46px;
+    }
+
+    .login-card {
+        padding: 28px 18px 24px;
+        border-radius: 12px;
+    }
+
+    .login-card h3 {
+        font-size: 23px;
+        line-height: 32px;
+    }
+
+    .form-row {
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .safe-tip {
+        align-items: flex-start;
+    }
+
+    .login-footer {
+        padding: 14px;
+    }
 }

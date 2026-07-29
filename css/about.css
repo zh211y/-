@@ -43,7 +43,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 64px;
-    width: 1060px;
+    width: min(1060px, calc(100% - 48px));
     margin: 74px auto 0;
     padding: 58px 78px;
     border: 1px solid rgba(224, 232, 238, 0.8);
@@ -133,4 +133,78 @@
     margin-top: 4px;
     color: #15202c;
     font-size: 20px;
+    word-break: break-word;
+}
+
+@media (max-width: 900px) {
+    .about-page {
+        padding: 82px 0 54px;
+    }
+
+    .back-link {
+        top: 18px;
+        left: 18px;
+    }
+
+    .about-title h1 {
+        font-size: 38px;
+        line-height: 52px;
+    }
+
+    .member-panel {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 22px;
+        width: calc(100% - 28px);
+        margin-top: 38px;
+        padding: 22px;
+        border-radius: 14px;
+    }
+
+    .member-card {
+        min-height: 0;
+        padding: 30px 22px 24px;
+        border-radius: 14px;
+    }
+
+    .avatar-mark {
+        width: 118px;
+        height: 118px;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 520px) {
+    .about-title h1 {
+        font-size: 31px;
+        line-height: 42px;
+    }
+
+    .member-panel {
+        padding: 14px;
+    }
+
+    .member-card li {
+        gap: 14px;
+        margin-bottom: 20px;
+    }
+
+    .contact-icon {
+        flex-basis: 46px;
+        width: 46px;
+        height: 46px;
+        line-height: 46px;
+        font-size: 22px;
+    }
+
+    .contact-icon::before {
+        font-size: 22px;
+    }
+
+    .member-card p {
+        font-size: 15px;
+    }
+
+    .member-card b {
+        font-size: 17px;
+    }
 }

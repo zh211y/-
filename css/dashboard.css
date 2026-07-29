@@ -18,6 +18,7 @@
     display: flex;
     align-items: center;
     gap: 14px;
+    min-width: 0;
 }
 
 .system-logo img {
@@ -28,6 +29,7 @@
 .system-logo h1 {
     font-size: 18px;
     line-height: 26px;
+    word-break: break-word;
 }
 
 .system-logo p {
@@ -39,6 +41,7 @@
     display: flex;
     align-items: center;
     gap: 20px;
+    min-width: 0;
 }
 
 .weather {
@@ -269,6 +272,7 @@
 
 .main {
     flex: 1;
+    min-width: 0;
     padding: 18px 24px 0 18px;
 }
 
@@ -289,6 +293,7 @@
     font-size: 38px;
     line-height: 1.45;
     letter-spacing: 0;
+    word-break: break-word;
 }
 
 .hero p {
@@ -487,10 +492,12 @@
 /* 事件表格 */
 .event-panel {
     padding-bottom: 18px;
+    overflow-x: auto;
 }
 
 table {
     width: calc(100% - 40px);
+    min-width: 720px;
     margin: 0 20px;
     border-collapse: collapse;
 }
@@ -717,5 +724,227 @@ footer {
 
     .right-column {
         grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .topbar {
+        align-items: flex-start;
+        height: auto;
+        min-height: 74px;
+        padding: 14px 16px;
+        gap: 14px;
+        flex-wrap: wrap;
+    }
+
+    .system-logo {
+        flex: 1 1 100%;
+        align-items: flex-start;
+    }
+
+    .system-logo img {
+        width: 38px;
+        height: 38px;
+        flex: 0 0 auto;
+    }
+
+    .system-logo h1 {
+        font-size: 16px;
+        line-height: 23px;
+    }
+
+    .topbar-tools {
+        width: 100%;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .weather {
+        flex: 1 1 210px;
+        min-width: 0;
+    }
+
+    .clock {
+        min-width: 0;
+        flex: 1 1 150px;
+    }
+
+    .layout {
+        display: block;
+    }
+
+    .sidebar {
+        width: 100%;
+        min-height: 0;
+        padding: 12px 12px 14px;
+        border-bottom: 1px solid #e9eef3;
+    }
+
+    .sidebar ul {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .sidebar li {
+        flex: 0 0 auto;
+        height: 40px;
+        margin: 0;
+        padding: 0 14px;
+        white-space: nowrap;
+    }
+
+    .side-card {
+        height: auto;
+        min-height: 118px;
+        margin: 12px 0 0;
+        padding: 16px 12px;
+    }
+
+    .main {
+        padding: 12px;
+    }
+
+    .hero {
+        height: auto;
+        min-height: 210px;
+        padding: 26px 22px;
+        border-radius: 8px;
+    }
+
+    .hero h2 {
+        font-size: 27px;
+        line-height: 1.35;
+    }
+
+    .hero p {
+        margin-top: 12px;
+        font-size: 15px;
+    }
+
+    .panel-hd {
+        height: auto;
+        min-height: 56px;
+        padding: 14px 16px;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .animal-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        padding: 0 12px 12px;
+    }
+
+    .stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .stat-card {
+        min-height: 118px;
+        padding: 18px;
+    }
+
+    .content-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .right-column {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .chart-row {
+        align-items: flex-start;
+        gap: 18px;
+        flex-wrap: wrap;
+    }
+
+    .friend-links {
+        flex-wrap: wrap;
+        gap: 8px 12px;
+        padding: 0 12px;
+    }
+}
+
+@media (max-width: 560px) {
+    .topbar {
+        padding: 12px;
+    }
+
+    .topbar-tools {
+        align-items: stretch;
+    }
+
+    .weather,
+    .clock {
+        flex-basis: 100%;
+    }
+
+    .bell,
+    .avatar,
+    .admin-wrap {
+        margin-top: 2px;
+    }
+
+    .admin-menu {
+        right: auto;
+        left: 0;
+    }
+
+    .hero {
+        min-height: 180px;
+        padding: 22px 18px;
+    }
+
+    .hero h2 {
+        font-size: 22px;
+    }
+
+    .animal-list,
+    .stats,
+    .env-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .atlas-controls {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .stat-card {
+        gap: 14px;
+    }
+
+    .stat-icon {
+        width: 56px;
+        height: 56px;
+        line-height: 56px;
+        font-size: 24px;
+        flex: 0 0 auto;
+    }
+
+    .stat-icon::before {
+        font-size: 24px;
+    }
+
+    .stat-card strong {
+        font-size: 26px;
+        line-height: 32px;
+    }
+
+    .chart-row {
+        padding: 6px 16px 22px;
+    }
+
+    .donut {
+        width: 112px;
+        height: 112px;
+    }
+
+    .device-list,
+    .env-grid {
+        padding-left: 16px;
+        padding-right: 16px;
     }
 }
