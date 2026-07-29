@@ -1,0 +1,18 @@
+@font-face {
+  font-family: "honor-iconfont"; /* Project id 5217411 */
+  src: url('iconfont.woff2?t=1785345762074') format('woff2'),
+       url('iconfont.woff?t=1785345762074') format('woff'),
+       url('iconfont.ttf?t=1785345762074') format('truetype');
+}
+
+.iconfont {
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-jiangbei:before {
+  font-family: "honor-iconfont" !important;
+  content: "\e7cf";
+}

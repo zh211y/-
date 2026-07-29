@@ -1,0 +1,68 @@
+@font-face {
+  font-family: "home-iconfont"; /* Project id 5217403 */
+  src: url('iconfont.woff2?t=1785339578575') format('woff2'),
+       url('iconfont.woff?t=1785339578575') format('woff'),
+       url('iconfont.ttf?t=1785339578575') format('truetype');
+}
+
+.iconfont {
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-zaixian:before {
+  font-family: "home-iconfont" !important;
+  content: "\e62e";
+}
+
+.icon-shezhi:before {
+  font-family: "home-iconfont" !important;
+  content: "\e643";
+}
+
+.icon-jiankong:before {
+  font-family: "home-iconfont" !important;
+  content: "\e670";
+}
+
+.icon-tianqi:before {
+  font-family: "home-iconfont" !important;
+  content: "\e663";
+}
+
+.icon-shebei:before {
+  font-family: "home-iconfont" !important;
+  content: "\e61b";
+}
+
+.icon-shijian:before {
+  font-family: "home-iconfont" !important;
+  content: "\e76c";
+}
+
+.icon-yujing:before {
+  font-family: "home-iconfont" !important;
+  content: "\e65f";
+}
+
+.icon-shuju:before {
+  font-family: "home-iconfont" !important;
+  content: "\e70c";
+}
+
+.icon-xiaoxi:before {
+  font-family: "home-iconfont" !important;
+  content: "\e612";
+}
+
+.icon-ditu:before {
+  font-family: "home-iconfont" !important;
+  content: "\e8ad";
+}
+
+.icon-shouye6:before {
+  font-family: "home-iconfont" !important;
+  content: "\e66f";
+}

@@ -1,0 +1,136 @@
+.about-page {
+    min-height: 100vh;
+    padding: 88px 0 96px;
+    background: radial-gradient(circle at 50% 12%, #fff 0, #f7faf8 42%, #eef4f0 100%);
+}
+
+.back-link {
+    position: fixed;
+    top: 26px;
+    left: 34px;
+    height: 36px;
+    padding: 0 18px;
+    border: 1px solid #dce8e2;
+    border-radius: 18px;
+    color: #17b970;
+    line-height: 34px;
+    font-weight: 700;
+    background-color: rgba(255, 255, 255, 0.82);
+    box-shadow: 0 8px 22px rgba(37, 49, 61, 0.08);
+}
+
+.about-title {
+    text-align: center;
+}
+
+.about-title h1 {
+    color: #15202c;
+    font-size: 50px;
+    line-height: 70px;
+    letter-spacing: 0;
+}
+
+.about-title span {
+    display: block;
+    width: 86px;
+    height: 8px;
+    margin: 24px auto 0;
+    border-radius: 6px;
+    background: linear-gradient(90deg, #16b96f 0 82%, transparent 82% 100%);
+}
+
+.member-panel {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 64px;
+    width: 1060px;
+    margin: 74px auto 0;
+    padding: 58px 78px;
+    border: 1px solid rgba(224, 232, 238, 0.8);
+    border-radius: 18px;
+    background-color: rgba(255, 255, 255, 0.86);
+    box-shadow: 0 22px 60px rgba(42, 56, 68, 0.12);
+}
+
+.member-card {
+    min-height: 520px;
+    padding: 44px 40px 36px;
+    border: 1px solid #e5ebf0;
+    border-radius: 18px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 12px 28px rgba(42, 56, 68, 0.08);
+}
+
+.avatar-mark {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 28px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: #eef2f6;
+    box-shadow: inset 0 0 0 1px #e0e7ee;
+}
+
+.avatar-mark img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.member-card h2 {
+    color: #15202c;
+    font-size: 28px;
+    line-height: 40px;
+}
+
+.member-card strong {
+    display: block;
+    margin-top: 8px;
+    color: #17b970;
+    font-size: 21px;
+}
+
+.member-line {
+    height: 1px;
+    margin: 36px 0 30px;
+    background-color: #e1e7ed;
+}
+
+.member-card li {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 26px;
+    text-align: left;
+}
+
+.contact-icon {
+    display: block;
+    flex: 0 0 56px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    color: #17b970;
+    text-align: center;
+    line-height: 56px;
+    font-size: 27px;
+    background-color: #e3f7ec;
+}
+
+.contact-icon::before {
+    font-size: 27px;
+}
+
+.member-card p {
+    color: #7a8795;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.member-card b {
+    display: block;
+    margin-top: 4px;
+    color: #15202c;
+    font-size: 20px;
+}

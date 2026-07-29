@@ -1,0 +1,18 @@
+@font-face {
+  font-family: "eye-iconfont"; /* Project id 5216808 */
+  src: url('iconfont.woff2?t=1785261888904') format('woff2'),
+       url('iconfont.woff?t=1785261888904') format('woff'),
+       url('iconfont.ttf?t=1785261888904') format('truetype');
+}
+
+.iconfont {
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-yanjing:before {
+  font-family: "eye-iconfont" !important;
+  content: "\e8bf";
+}

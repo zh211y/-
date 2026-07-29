@@ -1,0 +1,16 @@
+{
+  "id": "5217411",
+  "name": "d",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "25537537",
+      "name": "奖杯",
+      "font_class": "jiangbei",
+      "unicode": "e7cf",
+      "unicode_decimal": 59343
+    }
+  ]
+}

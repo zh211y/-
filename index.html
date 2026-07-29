@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高原保护区交通安全管理系统-WildGuard 智护平台</title>
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/dashboard.css">
+    <link rel="stylesheet" href="./首页矢量图/iconfont.css">
+    <link rel="stylesheet" href="./首页矢量图（续）/iconfont.css">
+    <link rel="stylesheet" href="./奖杯矢量图/iconfont.css">
+</head>
+<body>
+    <!-- 后台首页区域 -->
+    <div class="dashboard-page" id="dashboardPage">
+        <!-- 顶部区域 -->
+        <div class="topbar">
+            <div class="system-logo">
+                <img src="./images/民大校徽.svg" alt="">
+                <div>
+                    <h1>高原保护区交通安全管理系统</h1>
+                    <p>守护野生动物 · 保障行车与行人安全</p>
+                </div>
+            </div>
+            <div class="topbar-tools">
+                <div class="weather">
+                    <span class="iconfont icon-tianqi weather-icon"></span>
+                    <div class="weather-main">
+                        <select id="weatherCity" title="切换城市">
+                            <option value="xining">西宁</option>
+                            <option value="haidong">海东</option>
+                            <option value="haibei">海北</option>
+                            <option value="huangnan">黄南</option>
+                            <option value="hainan">海南</option>
+                            <option value="guoluo">果洛</option>
+                            <option value="yushu">玉树</option>
+                            <option value="haixi">海西</option>
+                        </select>
+                        <strong id="weatherTemp">--°C</strong>
+                    </div>
+                    <span id="weatherDesc">实时天气加载中</span>
+                </div>
+                <div class="clock" id="clockText">--</div>
+                <button class="bell" title="预警消息"><span class="iconfont icon-xiaoxi"></span><i>12</i></button>
+                <img class="avatar" src="./uploads/首页图片.jpg" alt="">
+                <div class="admin-wrap">
+                    <button class="admin" id="adminBtn"><span class="iconfont icon-shezhi"></span><span id="adminName">管理员</span></button>
+                    <div class="admin-menu hide" id="adminMenu">
+                        <button type="button" id="profileBtn">个人资料</button>
+                        <button type="button" id="logoutBtn">退出登录</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="layout">
+            <!-- 侧边导航 -->
+            <aside class="sidebar">
+                <ul id="menuList"></ul>
+                <div class="side-card">
+                    <h3>科技守护高原</h3>
+                    <p>人与自然 和谐共生</p>
+                    <button>了解更多</button>
+                </div>
+            </aside>
+
+            <!-- 主体内容 -->
+            <main class="main">
+                <section class="hero">
+                    <div>
+                        <h2>科技助力高原生态保护<br>智能预警 · 安全同行</h2>
+                        <p>实时监测野生动物活动，降低交通风险，守护生命安全</p>
+                    </div>
+                </section>
+
+                <!-- 青海野生动物图鉴 -->
+                <section class="animal-atlas panel">
+                    <div class="panel-hd">
+                        <h3>青海野生动物图鉴</h3>
+                        <div class="atlas-controls">
+                            <button type="button" id="animalPrev">上一组</button>
+                            <span id="animalPageText">1 / 5</span>
+                            <button type="button" id="animalNext">下一组</button>
+                        </div>
+                    </div>
+                    <div class="animal-list" id="animalAtlasList"></div>
+                </section>
+
+                <!-- 数据卡片 -->
+                <section class="stats" id="statsList"></section>
+
+                <div class="content-grid">
+                    <!-- 最近预警事件 -->
+                    <section class="panel event-panel">
+                        <div class="panel-hd">
+                            <h3>最近预警事件</h3>
+                            <a href="#">查看更多</a>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>事件类型</th>
+                                    <th>位置</th>
+                                    <th>时间</th>
+                                    <th>影响等级</th>
+                                    <th>状态</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="eventTable"></tbody>
+                        </table>
+                    </section>
+
+                    <!-- 右侧信息栏 -->
+                    <section class="right-column">
+                        <div class="panel">
+                            <div class="panel-hd">
+                                <h3>预警等级分布</h3>
+                                <a href="#">查看更多</a>
+                            </div>
+                            <div class="chart-row">
+                                <div class="donut"><span>102<em>总预警</em></span></div>
+                                <ul class="legend" id="legendList"></ul>
+                            </div>
+                        </div>
+
+                        <div class="panel">
+                            <div class="panel-hd">
+                                <h3>设备状态</h3>
+                                <a href="#">查看更多</a>
+                            </div>
+                            <div class="progress"><span></span></div>
+                            <ul class="device-list" id="deviceList"></ul>
+                        </div>
+
+                        <div class="panel">
+                            <div class="panel-hd">
+                                <h3>环境信息</h3>
+                                <a href="#">查看更多</a>
+                            </div>
+                            <div class="env-grid" id="envList"></div>
+                        </div>
+                    </section>
+                </div>
+
+                <footer>
+                    <div class="friend-links">
+                        <span>友情链接：</span>
+                        <a href="https://www.qhmu.edu.cn/" target="_blank" rel="noopener noreferrer">青海民族大学</a>
+                        <a href="https://tmjt.qhmu.edu.cn/" target="_blank" rel="noopener noreferrer">青海民族大学土木与交通工程学院</a>
+                    </div>
+                    <p>© 2026 高原保护区交通安全管理系统</p>
+                </footer>
+            </main>
+        </div>
+    </div>
+
+    <script src="./js/data.js"></script>
+    <script src="./js/main.js"></script>
+</body>
+</html>

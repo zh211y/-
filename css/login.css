@@ -1,0 +1,296 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 5216808 */
+  src: url('iconfont.woff2?t=1785244528080') format('woff2'),
+       url('iconfont.woff?t=1785244528080') format('woff'),
+       url('iconfont.ttf?t=1785244528080') format('truetype');
+}
+
+/* 登录页整体背景 */
+.login-page {
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    background: url("../uploads/登录页图.jpg") center / cover no-repeat;
+    color: #fff;
+}
+
+.login-mask {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(7, 42, 70, 0.82), rgba(9, 52, 82, 0.45) 52%, rgba(2, 16, 28, 0.5));
+}
+
+/* 顶部品牌 */
+.login-brand {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 72px 0 0 74px;
+}
+
+.login-brand img {
+    width: 78px;
+    height: 78px;
+    color: #15b56b;
+}
+
+.login-brand h1 {
+    font-size: 30px;
+    line-height: 42px;
+    letter-spacing: 0;
+}
+
+.login-brand p {
+    margin-top: 4px;
+    font-size: 17px;
+    color: rgba(255, 255, 255, 0.78);
+}
+
+/* 左侧宣传区域 */
+.login-slogan {
+    position: relative;
+    z-index: 1;
+    width: 440px;
+    margin: 110px 0 0 74px;
+}
+
+.login-slogan h2 {
+    font-size: 42px;
+    line-height: 1.45;
+    letter-spacing: 0;
+}
+
+.login-slogan > p {
+    margin-top: 26px;
+    font-size: 18px;
+    line-height: 34px;
+    color: rgba(255, 255, 255, 0.86);
+}
+
+.login-slogan ul {
+    margin-top: 44px;
+}
+
+.login-slogan li {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 28px;
+}
+
+.round-icon {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 58px;
+    font-size: 26px;
+    font-weight: 700;
+    background: rgba(255, 255, 255, 0.16);
+}
+.icon-zaixianjiance::before{
+    font-size:32px;
+    color: #1ed07a;  
+}
+.icon-kucunyujing::before{
+    font-size:32px;
+    color:  #ffac23;
+}
+.icon-anquan::before{
+    font-size:32px;
+    color:  #58a5ff;
+}
+
+
+.login-slogan strong {
+    display: block;
+    font-size: 20px;
+}
+
+.login-slogan em {
+    display: block;
+    margin-top: 4px;
+    font-style: normal;
+    color: rgba(255, 255, 255, 0.72);
+}
+
+/* 登录表单卡片 */
+.login-card {
+    position: absolute;
+    z-index: 1;
+    top: 130px;
+    left: 65%;
+    width: 450px;
+    padding: 44px 40px 38px;
+    border-radius: 16px;
+    color: #27313c;
+    background-color: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 20px 70px rgba(5, 25, 42, 0.3);
+    transform: translateX(-8%);
+}
+
+.login-card h3 {
+    text-align: center;
+    font-size: 27px;
+    line-height: 38px;
+}
+
+.login-card > p {
+    margin: 12px 0 34px;
+    text-align: center;
+    color: #758190;
+}
+
+.input-box {
+    display: flex;
+    align-items: center;
+    height: 54px;
+    margin-bottom: 22px;
+    padding: 0 18px;
+    border: 1px solid #d8e0e8;
+    border-radius: 9px;
+    background-color: #fff;
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #3e81bd;
+}
+
+
+.input-box:focus-within {
+    border-color: #20be73;
+    box-shadow: 0 0 0 3px rgba(32, 190, 115, 0.12);
+}
+
+.input-box span {
+    margin-right: 14px;
+    color: #6b7785;
+}
+
+.input-box input {
+    flex: 1;
+    border: 0;
+    outline: none;
+    font-size: 15px;
+}
+
+.login-error {
+    min-height: 22px;
+    margin: -10px 0 12px;
+    color: #ef3f45;
+    font-size: 13px;
+}
+
+.icon-btn {
+    width: 28px;
+    height: 28px;
+    color: #8b97a5;
+    background-color: transparent;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 2px 0 30px;
+}
+
+.form-row a,
+.form-row input {
+    accent-color: #20be73;
+    color: #15b56b;
+}
+
+.login-btn {
+    width: 100%;
+    height: 54px;
+    border-radius: 9px;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 700;
+    background: linear-gradient(90deg, #12b96d, #58c985);
+}
+
+.other-login {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin: 26px 0 18px;
+    color: #788493;
+}
+
+.other-login::before,
+.other-login::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background-color: #dce3ea;
+}
+
+.device-login {
+    display: block;
+    width: 62px;
+    height: 62px;
+    margin: 0 auto;
+    border: 1px solid #dfe8f2;
+    border-radius: 50%;
+    color: #3e81bd;
+    font-size: 25px;
+    background-color: #fff;
+    /* background-image: url(../uploads/民大校徽.png); */
+}
+
+.device-login .iconfont {
+    color: #3e81bd;
+    font-size: 25px;
+}
+
+.icon-yanjing::before{
+    font-size: 30px;
+}
+
+.device-text {
+    margin-top: 10px;
+    text-align: center;
+    font-weight: 800;
+    color: black;
+}
+
+/* 登录页底部 */
+.login-footer {
+    position: absolute;
+    z-index: 1;
+    left: 58px;
+    right: 58px;
+    bottom: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 68px;
+    padding: 14px 28px;
+    border-radius: 10px;
+    background: rgba(30, 48, 64, 0.78);
+    backdrop-filter: blur(10px);
+    color: rgba(255, 255, 255, 0.82);
+}
+
+.safe-tip {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.safe-tip img {
+    width: 44px;
+    height: 44px;
+}
+
+.login-footer div:last-child {
+    text-align: right;
+}

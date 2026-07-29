@@ -1,0 +1,136 @@
+.honor-page {
+    min-height: 100vh;
+    padding: 58px 0 46px;
+    background: radial-gradient(circle at 50% 10%, #fff 0, #f8fbf9 44%, #eef4f0 100%);
+}
+
+.back-link {
+    position: fixed;
+    top: 24px;
+    left: 32px;
+    z-index: 3;
+    height: 36px;
+    padding: 0 18px;
+    border: 1px solid #dce8e2;
+    border-radius: 18px;
+    color: #17b970;
+    line-height: 34px;
+    font-weight: 700;
+    background-color: rgba(255, 255, 255, 0.86);
+    box-shadow: 0 8px 22px rgba(37, 49, 61, 0.08);
+}
+
+.honor-title {
+    text-align: center;
+}
+
+.honor-title h1 {
+    color: #111b25;
+    font-size: 46px;
+    line-height: 64px;
+    letter-spacing: 0;
+}
+
+.honor-title span {
+    display: block;
+    width: 80px;
+    height: 7px;
+    margin: 18px auto 0;
+    border-radius: 6px;
+    background: linear-gradient(90deg, #17b970 0 82%, transparent 82% 100%);
+}
+
+.honor-title p {
+    margin-top: 22px;
+    color: #6a7684;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.honor-list {
+    width: 1080px;
+    margin: 42px auto 0;
+}
+
+.honor-item {
+    display: grid;
+    grid-template-columns: 1fr 470px;
+    align-items: center;
+    gap: 48px;
+    min-height: 286px;
+    margin-bottom: 20px;
+    padding: 22px 56px 22px 42px;
+    border: 1px solid rgba(224, 232, 238, 0.82);
+    border-radius: 14px;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 12px 32px rgba(42, 56, 68, 0.07);
+}
+
+.honor-copy {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.honor-icon {
+    flex: 0 0 56px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    color: #17b970;
+    text-align: center;
+    line-height: 56px;
+    background-color: #e3f7ec;
+}
+
+.honor-icon::before {
+    font-size: 28px;
+}
+
+.honor-copy h2 {
+    color: #111b25;
+    font-size: 26px;
+    line-height: 38px;
+}
+
+.honor-copy p {
+    width: 390px;
+    margin-top: 18px;
+    color: #657181;
+    font-size: 15px;
+    line-height: 30px;
+    font-weight: 700;
+}
+
+.honor-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 220px;
+    overflow: hidden;
+    border-radius: 8px;
+    background-color: #f3f6f8;
+    box-shadow: 0 8px 18px rgba(42, 56, 68, 0.08);
+}
+
+.honor-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.product-show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 220px;
+    overflow: hidden;
+    border-radius: 8px;
+    background-color: #dbe8ef;
+}
+
+.product-show img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}

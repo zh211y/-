@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户登录-高原保护区交通安全管理系统</title>
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/login.css">
+    <link rel="stylesheet" href="./登录页矢量图/iconfont.css">
+    <link rel="stylesheet" href="./登录页左侧矢量图/iconfont.css">
+    <link rel="stylesheet" href="./密码隐藏矢量图/iconfont.css">
+</head>
+<body>
+    <!-- 登录区域 -->
+    <div class="login-page" id="loginPage">
+        <div class="login-mask"></div>
+
+        <!-- 顶部品牌 -->
+        <div class="login-brand">
+            <img src="./images/民大校徽.svg" alt="高原保护区交通安全管理系统">
+            <div>
+                <h1>高原保护区交通安全管理系统-WildGuard 智护平台</h1>
+                <p>守护野生动物 · 保障行车与行人安全</p>
+            </div>
+        </div>
+
+        <!-- 左侧宣传文案 -->
+        <div class="login-slogan">
+            <h2>科技守护高原生态<br>智能预警 · 安全同行</h2>
+            <p>通过智能检测与实时预警，降低交通风险，保护野生动物，守护生命安全。</p>
+            <ul>
+                <li>
+                    <span class="round-icon iconfont icon-zaixianjiance"></span>
+                    <div><strong>智能检测</strong><em>识别野生动物是否侵入道路</em></div>
+                </li>
+                <li>
+                    <span class="round-icon iconfont icon-kucunyujing"></span>
+                    <div><strong>实时预警</strong><em>后台预警机制，及时提醒</em></div>
+                </li>
+                <li>
+                    <span class="round-icon iconfont icon-anquan"></span>
+                    <div><strong>安全保障</strong><em>保护动物与行人，降低交通风险</em></div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 登录表单 -->
+        <div class="login-card">
+            <h3>用户登录</h3>
+            <p>欢迎登录高原保护区交通安全管理系统</p>
+            <form id="loginForm">
+                <label class="input-box">
+                    <span class="iconfont icon-denglu"></span>
+                    <input type="text" id="username" placeholder="请输入用户名" autocomplete="username">
+                </label>
+                <label class="input-box">
+                    <span class="iconfont icon-suo"></span>
+                    <input type="password" id="password" placeholder="请输入密码" autocomplete="current-password">
+                    <button type="button" class="icon-btn" id="togglePassword" title="显示/隐藏密码"><span class="iconfont icon-yanjing"></span></button>
+                </label>
+                <p class="login-error" id="loginError"></p>
+                <div class="form-row">
+                    <label><input type="checkbox" id="rememberMe" checked> 记住我</label>
+                    <a href="#" id="forgotPassword">忘记密码?</a>
+                </div>
+                <button type="submit" class="login-btn">登录</button>
+            </form>
+            <div class="other-login"><span>其他登录方式</span></div>
+            <button type="button" class="device-login" id="deviceLogin" title="民大学号登录"><span class="iconfont icon-denglu"></span></button>
+            <p class="device-text">民大学号登录</p>
+        </div>
+
+        <!-- 底部提示 -->
+        <div class="login-footer">
+            <div class="safe-tip">
+                <img src="./images/民大校徽.svg" alt="">
+                <span>谨慎驾驶 · 注意路况 · 保护野生动物 · 人人有责</span>
+            </div>
+            <div>
+                <p>致谢：icanfont阿里巴巴矢量图标库提供免费图标</p>
+                <p>高原保护区交通安全管理系统　V1.0.0版</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/login.js"></script>
+</body>
+</html>

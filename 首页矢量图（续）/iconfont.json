@@ -1,0 +1,23 @@
+{
+  "id": "5217410",
+  "name": "c",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "5643516",
+      "name": "关于我们",
+      "font_class": "guanyuwomen",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "5703270",
+      "name": "产品",
+      "font_class": "zhongguohangtiantubiaoheji-weizhuanlunkuo-",
+      "unicode": "e62f",
+      "unicode_decimal": 58927
+    }
+  ]
+}

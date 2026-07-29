@@ -1,0 +1,44 @@
+/* 基础公共样式：清除默认样式 + 设置通用字体 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+li {
+    list-style: none;
+}
+
+body {
+    min-width: 1200px;
+    font: 14px/1.5 "Microsoft Yahei", "Hiragino Sans GB", "Heiti SC", sans-serif;
+    color: #26323f;
+    background-color: #f4f7fa;
+}
+
+a {
+    color: #26323f;
+    text-decoration: none;
+}
+
+button,
+input {
+    font-family: inherit;
+}
+
+button {
+    border: 0;
+    cursor: pointer;
+}
+
+img {
+    display: block;
+}
+
+.hide {
+    display: none;
+}
+
+/* 阿里巴巴图标库接入说明：
+   如果后续有自己的 Iconfont 项目，可在 HTML 中引入官方生成的 iconfont.css，
+   再把页面中的文字图标替换成 <i class="iconfont icon-xxx"></i>。 */

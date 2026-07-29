@@ -1,0 +1,86 @@
+{
+  "id": "5217403",
+  "name": "b",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "559585",
+      "name": "在线",
+      "font_class": "zaixian",
+      "unicode": "e62e",
+      "unicode_decimal": 58926
+    },
+    {
+      "icon_id": "1167181",
+      "name": "设置",
+      "font_class": "shezhi",
+      "unicode": "e643",
+      "unicode_decimal": 58947
+    },
+    {
+      "icon_id": "3978401",
+      "name": "监控",
+      "font_class": "jiankong",
+      "unicode": "e670",
+      "unicode_decimal": 58992
+    },
+    {
+      "icon_id": "4893439",
+      "name": "天气",
+      "font_class": "tianqi",
+      "unicode": "e663",
+      "unicode_decimal": 58979
+    },
+    {
+      "icon_id": "4942657",
+      "name": "设备",
+      "font_class": "shebei",
+      "unicode": "e61b",
+      "unicode_decimal": 58907
+    },
+    {
+      "icon_id": "7404295",
+      "name": "事件",
+      "font_class": "shijian",
+      "unicode": "e76c",
+      "unicode_decimal": 59244
+    },
+    {
+      "icon_id": "8949040",
+      "name": "预警",
+      "font_class": "yujing",
+      "unicode": "e65f",
+      "unicode_decimal": 58975
+    },
+    {
+      "icon_id": "10056256",
+      "name": "数据",
+      "font_class": "shuju",
+      "unicode": "e70c",
+      "unicode_decimal": 59148
+    },
+    {
+      "icon_id": "10121088",
+      "name": "消息",
+      "font_class": "xiaoxi",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    },
+    {
+      "icon_id": "11372655",
+      "name": "地图",
+      "font_class": "ditu",
+      "unicode": "e8ad",
+      "unicode_decimal": 59565
+    },
+    {
+      "icon_id": "28233587",
+      "name": "首页",
+      "font_class": "shouye6",
+      "unicode": "e66f",
+      "unicode_decimal": 58991
+    }
+  ]
+}

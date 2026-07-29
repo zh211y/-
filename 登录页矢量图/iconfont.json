@@ -1,0 +1,23 @@
+{
+  "id": "5216808",
+  "name": "a",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "2578488",
+      "name": "登录",
+      "font_class": "denglu",
+      "unicode": "e611",
+      "unicode_decimal": 58897
+    },
+    {
+      "icon_id": "4034115",
+      "name": "登录页-密码",
+      "font_class": "suo",
+      "unicode": "e664",
+      "unicode_decimal": 58980
+    }
+  ]
+}
