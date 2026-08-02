@@ -10,7 +10,6 @@ const excludedNames = new Set([
   "dist",
   "node_modules",
   "scripts",
-  "functions",
   "docx_render",
   ".gitattributes",
   ".gitignore",

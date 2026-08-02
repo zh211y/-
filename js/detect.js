@@ -6,9 +6,8 @@ const cameraInput = document.querySelector("#cameraInput");
 const liveBadge = document.querySelector("#liveBadge");
 const detectList = document.querySelector("#detectList");
 
-const MYCAM_BASES = ["http://127.0.0.1:8010", "http://localhost:8010"];
+const MYCAM_BASE = "http://127.0.0.1:8010";
 const CONFIDENCE = "0.25";
-let activeMycamBase = "";
 let isStreaming = false;
 
 function resetPreview() {
@@ -18,11 +17,10 @@ function resetPreview() {
     liveBadge.classList.remove("online");
 }
 
-function startRealtime(baseUrl) {
+function startRealtime() {
     const camera = Number(cameraInput.value || 0);
-    activeMycamBase = baseUrl;
     resetPreview();
-    resultImage.src = activeMycamBase + "/video-feed?camera=" + camera + "&conf=" + CONFIDENCE + "&t=" + Date.now();
+    resultImage.src = MYCAM_BASE + "/video-feed?camera=" + camera + "&conf=" + CONFIDENCE + "&t=" + Date.now();
     resultImage.style.display = "block";
     preview.classList.add("has-image");
     liveBadge.classList.add("online");
@@ -33,7 +31,6 @@ function startRealtime(baseUrl) {
 }
 
 function showOffline() {
-    activeMycamBase = "";
     isStreaming = false;
     resetPreview();
     modelText.innerText = "实时监控未连接";
@@ -41,29 +38,17 @@ function showOffline() {
     detectList.innerHTML = "<li>实时监控未连接 <b>offline</b></li>";
 }
 
-function checkBase(baseUrl) {
-    return fetch(baseUrl + "/status?ts=" + Date.now(), { cache: "no-store" })
+function syncRealtime() {
+    fetch(MYCAM_BASE + "/status", { cache: "no-store" })
         .then(function (res) {
             if (!res.ok) {
                 throw new Error("realtime offline");
             }
-            return baseUrl;
-        });
-}
-
-function syncRealtime() {
-    const bases = activeMycamBase ? [activeMycamBase].concat(MYCAM_BASES.filter(function (base) {
-        return base !== activeMycamBase;
-    })) : MYCAM_BASES;
-
-    bases.reduce(function (promise, baseUrl) {
-        return promise.catch(function () {
-            return checkBase(baseUrl);
-        });
-    }, Promise.reject())
-        .then(function (baseUrl) {
-            if (!isStreaming || activeMycamBase !== baseUrl) {
-                startRealtime(baseUrl);
+            return res.json();
+        })
+        .then(function () {
+            if (!isStreaming) {
+                startRealtime();
             }
         })
         .catch(showOffline);
