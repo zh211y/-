@@ -1,4 +1,4 @@
-/* 首页渲染：把接口或 data.js 中的数据渲染到页面 */
+/* 首页渲染：只渲染数据库接口返回的数据 */
 if (localStorage.getItem("isLogin") !== "true") {
     location.href = "./login.html";
 }
@@ -14,15 +14,46 @@ const weatherDesc = document.querySelector("#weatherDesc");
 const clockText = document.querySelector("#clockText");
 const statsList = document.querySelector("#statsList");
 const eventTable = document.querySelector("#eventTable");
+const toggleAllEvents = document.querySelector("#toggleAllEvents");
+const eventPagination = document.querySelector("#eventPagination");
+const imageModal = document.querySelector("#imageModal");
+const imageModalImg = document.querySelector("#imageModalImg");
+const imageModalMask = document.querySelector("#imageModalMask");
+const imageModalClose = document.querySelector("#imageModalClose");
 const legendList = document.querySelector("#legendList");
 const deviceList = document.querySelector("#deviceList");
 const envList = document.querySelector("#envList");
+const warningTotal = document.querySelector("#warningTotal");
 const adminBtn = document.querySelector("#adminBtn");
 const adminName = document.querySelector("#adminName");
 const adminMenu = document.querySelector("#adminMenu");
 const profileBtn = document.querySelector("#profileBtn");
 const logoutBtn = document.querySelector("#logoutBtn");
-let dashboardData = appData;
+const DEFAULT_MENU = [
+    ["icon-shouye6", "首页概览"],
+    ["icon-jiankong", "实时监控", "./detect.html"],
+    ["icon-shijian", "事件管理"],
+    ["icon-shebei", "设备管理"],
+    ["icon-shuju", "数据统计"],
+    ["icon-ditu", "地图总览"],
+    ["icon-zhongguohangtiantubiaoheji-weizhuanlunkuo-", "关于产品", "./about-product.html"],
+    ["icon-guanyuwomen", "关于我们", "./about-us.html"],
+    ["icon-jiangbei", "团队荣誉", "./team-honor.html"]
+];
+const EMPTY_DASHBOARD = {
+    animals: [],
+    menu: DEFAULT_MENU,
+    stats: [],
+    events: [],
+    warnings: [],
+    devices: [],
+    env: []
+};
+let dashboardData = EMPTY_DASHBOARD;
+let showingAllEvents = false;
+let allEventItems = [];
+const allEventsPageSize = 6;
+let allEventsPage = 1;
 const animalPageSize = 4;
 let animalPageIndex = 0;
 let animalTimer = null;
@@ -111,8 +142,10 @@ function renderAdminName() {
 }
 
 function renderAnimalAtlas() {
-    const animals = dashboardData.animals || dashboardData.carousel || [];
+    const animals = Array.isArray(dashboardData.animals) ? dashboardData.animals : [];
     if (!animals.length) {
+        animalAtlasList.innerHTML = '<div class="empty-state">数据库暂无动物图鉴数据</div>';
+        animalPageText.innerText = "0 / 0";
         return;
     }
 
@@ -136,7 +169,7 @@ function renderAnimalAtlas() {
 }
 
 function showAnimalPage(index) {
-    const animals = dashboardData.animals || dashboardData.carousel || [];
+    const animals = Array.isArray(dashboardData.animals) ? dashboardData.animals : [];
     const totalPages = Math.ceil(animals.length / animalPageSize);
     if (!totalPages) {
         return;
@@ -153,63 +186,289 @@ function startAnimalPlay() {
     }, 4500);
 }
 
+function loadAnimalAtlas() {
+    const animals = Array.isArray(dashboardData.animals) ? dashboardData.animals : [];
+    if (animals.length) {
+        return;
+    }
+
+    if (Array.isArray(window.animalAtlasData) && window.animalAtlasData.length) {
+        dashboardData.animals = window.animalAtlasData;
+        animalPageIndex = 0;
+        renderAnimalAtlas();
+        startAnimalPlay();
+        return;
+    }
+
+    fetch("./uploads/animals/animals.json")
+        .then(function (res) {
+            if (!res.ok) {
+                throw new Error("animal atlas not found");
+            }
+            return res.json();
+        })
+        .then(function (items) {
+            dashboardData.animals = Array.isArray(items) ? items : [];
+            animalPageIndex = 0;
+            renderAnimalAtlas();
+            startAnimalPlay();
+        })
+        .catch(function () {
+            renderAnimalAtlas();
+        });
+}
+
 function renderMenu() {
-    menuList.innerHTML = dashboardData.menu.map(function (item, index) {
+    const menu = Array.isArray(dashboardData.menu) && dashboardData.menu.length ? dashboardData.menu : DEFAULT_MENU;
+    menuList.innerHTML = menu.map(function (item, index) {
+        const href = index === 1 ? "./detect.html" : item[2];
+        const alertText = index >= 2 && index <= 4 ? "暂未开通" : "";
         let content = '<span class="iconfont ' + item[0] + '"></span>' + item[1];
-        if (item[2]) {
-            content = '<a href="' + item[2] + '">' + content + '</a>';
+        if (href) {
+            content = '<a href="' + href + '">' + content + '</a>';
         }
-        return '<li class="' + (index === 0 ? "active" : "") + '">' + content + '</li>';
+        return '<li class="' + (index === 0 ? "active" : "") + '" data-href="' + (href || "") + '" data-alert="' + alertText + '">' + content + '</li>';
     }).join("");
 }
 
 function renderStats() {
-    statsList.innerHTML = dashboardData.stats.map(function (item) {
+    const stats = Array.isArray(dashboardData.stats) ? dashboardData.stats : [];
+    statsList.innerHTML = stats.map(function (item) {
         return '<div class="stat-card">' +
             '<span class="stat-icon iconfont ' + item.icon + '" style="background:' + item.color + ';color:' + item.iconColor + '"></span>' +
             '<div><h3>' + item.title + '</h3><strong>' + item.value + '</strong><p class="' + item.trend + '">' + item.desc + '</p></div>' +
             '</div>';
     }).join("");
+
+}
+
+function escapeAttr(value) {
+    return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/"/g, "&quot;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+}
+
+function normalizeEvent(item) {
+    return {
+        id: item.id || item.event_id || "",
+        type: item.type || item.event_type || "动物靠近",
+        label: item.label || "",
+        confidence: Number(item.confidence || 0),
+        place: item.place || "实时监控点位",
+        time: item.time || String(item.created_at || "").replace(" ", "<br>"),
+        level: item.level || "低危",
+        state: item.state || "未处理",
+        img: item.img || item.image || "./uploads/首页图片.jpg"
+    };
 }
 
 function renderEvents() {
-    eventTable.innerHTML = dashboardData.events.map(function (item) {
+    const sourceEvents = showingAllEvents ? allEventItems : dashboardData.events;
+    const events = Array.isArray(sourceEvents) ? sourceEvents.map(normalizeEvent) : [];
+    const visibleEvents = getVisibleEvents(events);
+    if (!events.length) {
+        renderEventPagination(0);
+        eventTable.innerHTML = '<tr><td colspan="7" class="empty-state">数据库暂无 YOLO 检测事件</td></tr>';
+        return;
+    }
+
+    eventTable.innerHTML = visibleEvents.map(function (item) {
         const tagClass = item.type.indexOf("设备") > -1 || item.type.indexOf("行人靠近") > -1 ? "gray" : "green";
         const levelClass = item.level === "高危" ? "high" : item.level === "中危" ? "mid" : "low";
-        const stateClass = item.state === "已处理" ? "done" : "todo";
+        const stateClass = stateClassName(item.state);
+        const labelText = item.label ? '<br><small>' + item.label + ' ' + Math.round((item.confidence || 0) * 100) + '%</small>' : "";
         return '<tr>' +
             '<td><img class="event-img" src="' + item.img + '" alt=""></td>' +
-            '<td><span class="tag ' + tagClass + '">' + item.type + '</span></td>' +
+            '<td><span class="tag ' + tagClass + '">' + item.type + labelText + '</span></td>' +
             '<td>' + item.place + '</td>' +
             '<td>' + item.time + '</td>' +
             '<td><span class="level ' + levelClass + '">' + item.level + '</span></td>' +
-            '<td><span class="state ' + stateClass + '">' + item.state + '</span></td>' +
-            '<td><a class="detail-link" href="#">查看详情</a></td>' +
+            '<td><select class="state state-select ' + stateClass + '" data-id="' + escapeAttr(item.id) + '">' + renderStateOptions(item.state) + '</select></td>' +
+            '<td><a class="detail-link" href="#" data-image="' + escapeAttr(item.img) + '">查看详情</a></td>' +
             '</tr>';
     }).join("");
+    renderEventPagination(events.length);
+}
+
+function stateClassName(state) {
+    if (state === "已处理") {
+        return "done";
+    }
+    if (state === "处理中") {
+        return "doing";
+    }
+    return "todo";
+}
+
+function renderStateOptions(selected) {
+    return ["未处理", "处理中", "已处理"].map(function (state) {
+        return '<option value="' + state + '" ' + (state === selected ? "selected" : "") + '>' + state + '</option>';
+    }).join("");
+}
+
+function getVisibleEvents(events) {
+    if (!showingAllEvents) {
+        return events;
+    }
+
+    const totalPages = Math.max(1, Math.ceil(events.length / allEventsPageSize));
+    allEventsPage = Math.min(Math.max(1, allEventsPage), totalPages);
+    const start = (allEventsPage - 1) * allEventsPageSize;
+    return events.slice(start, start + allEventsPageSize);
+}
+
+function renderEventPagination(total) {
+    if (!eventPagination) {
+        return;
+    }
+
+    const totalPages = Math.max(1, Math.ceil(total / allEventsPageSize));
+    if (!showingAllEvents || total <= allEventsPageSize) {
+        eventPagination.classList.add("hide");
+        eventPagination.innerHTML = "";
+        return;
+    }
+
+    allEventsPage = Math.min(Math.max(1, allEventsPage), totalPages);
+    const pageButtons = [];
+    for (let page = 1; page <= totalPages; page += 1) {
+        pageButtons.push(
+            '<button type="button" class="' + (page === allEventsPage ? "active" : "") + '" data-page="' + page + '">' + page + '</button>'
+        );
+    }
+
+    eventPagination.classList.remove("hide");
+    eventPagination.innerHTML =
+        '<button type="button" data-page="prev" ' + (allEventsPage === 1 ? "disabled" : "") + '>上一页</button>' +
+        pageButtons.join("") +
+        '<button type="button" data-page="next" ' + (allEventsPage === totalPages ? "disabled" : "") + '>下一页</button>' +
+        '<span>第 ' + allEventsPage + ' / ' + totalPages + ' 页</span>';
+}
+
+function openImageModal(src) {
+    if (!src || !imageModal || !imageModalImg) {
+        return;
+    }
+    imageModalImg.src = src;
+    imageModal.classList.remove("hide");
+}
+
+function closeImageModal() {
+    if (!imageModal || !imageModalImg) {
+        return;
+    }
+    imageModal.classList.add("hide");
+    imageModalImg.src = "";
+}
+
+function loadAllEvents() {
+    fetch(API_BASE + "/api/detections?ts=" + Date.now())
+        .then(function (res) {
+            if (!res.ok) {
+                throw new Error("detections api error");
+            }
+            return res.json();
+        })
+        .then(function (items) {
+            allEventItems = Array.isArray(items) ? items.slice().sort(function (a, b) {
+                return Number(b.id || 0) - Number(a.id || 0);
+            }) : [];
+            renderEvents();
+        });
+}
+
+function patchLocalEventState(id, state) {
+    function updateList(list) {
+        if (!Array.isArray(list)) {
+            return;
+        }
+        list.forEach(function (item) {
+            if (Number(item.id) === Number(id)) {
+                item.state = state;
+            }
+        });
+    }
+
+    updateList(allEventItems);
+    updateList(dashboardData.events);
+}
+
+function updateEventState(id, state, select) {
+    if (!id) {
+        return;
+    }
+
+    if (select) {
+        select.disabled = true;
+    }
+
+    fetch(API_BASE + "/api/detections/" + encodeURIComponent(id), {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ state: state })
+    })
+        .then(function (res) {
+            if (!res.ok) {
+                throw new Error("state api error");
+            }
+            return res.json();
+        })
+        .then(function () {
+            patchLocalEventState(id, state);
+            renderEvents();
+            refreshDashboard();
+        })
+        .catch(function () {
+            alert("状态保存失败，请确认 Node 服务正在运行");
+            renderEvents();
+        })
+        .finally(function () {
+            if (select) {
+                select.disabled = false;
+            }
+        });
 }
 
 function renderSideInfo() {
-    legendList.innerHTML = dashboardData.warnings.map(function (item) {
-        return '<li><span class="dot" style="background:' + item.color + '"></span>' + item.name + '<b>' + item.value + '</b></li>';
-    }).join("");
+    const warnings = Array.isArray(dashboardData.warnings) ? dashboardData.warnings : [];
+    const devices = Array.isArray(dashboardData.devices) ? dashboardData.devices : [];
+    const env = Array.isArray(dashboardData.env) ? dashboardData.env : [];
+    const totalWarnings = warnings.reduce(function (sum, item) {
+        const match = String(item.value || "").match(/\d+/);
+        return sum + (match ? Number(match[0]) : 0);
+    }, 0);
 
-    deviceList.innerHTML = dashboardData.devices.map(function (item) {
-        return '<li><span class="dot" style="background:' + item.color + '"></span>' + item.name + '<b>' + item.value + '</b></li>';
-    }).join("");
+    if (warningTotal) {
+        warningTotal.innerHTML = totalWarnings + "<em>总预警</em>";
+    }
 
-    envList.innerHTML = dashboardData.env.map(function (item) {
+    legendList.innerHTML = warnings.length ? warnings.map(function (item) {
+        return '<li><span class="dot" style="background:' + item.color + '"></span>' + item.name + '<b>' + item.value + '</b></li>';
+    }).join("") : '<li class="empty-state">暂无预警分布数据</li>';
+
+    deviceList.innerHTML = devices.length ? devices.map(function (item) {
+        return '<li><span class="dot" style="background:' + item.color + '"></span>' + item.name + '<b>' + item.value + '</b></li>';
+    }).join("") : '<li class="empty-state">暂无设备数据</li>';
+
+    envList.innerHTML = env.length ? env.map(function (item) {
         return '<div class="env-item"><span class="iconfont ' + item.icon + '"></span><div><p>' + item.name + '</p><strong>' + item.value + '</strong></div></div>';
-    }).join("");
+    }).join("") : '<div class="empty-state">暂无环境数据</div>';
 }
 
 function initDashboard(data) {
-    dashboardData = data || appData;
-    if (!dashboardData.animals || dashboardData.animals.length < appData.animals.length) {
-        dashboardData.animals = appData.animals || appData.carousel;
+    const currentAnimals = Array.isArray(dashboardData.animals) ? dashboardData.animals : [];
+    dashboardData = Object.assign({}, EMPTY_DASHBOARD, data || {});
+    if (!Array.isArray(dashboardData.menu) || !dashboardData.menu.length) {
+        dashboardData.menu = DEFAULT_MENU;
+    }
+    if ((!Array.isArray(dashboardData.animals) || !dashboardData.animals.length) && currentAnimals.length) {
+        dashboardData.animals = currentAnimals;
     }
     animalPageIndex = 0;
     renderAnimalAtlas();
+    loadAnimalAtlas();
     startAnimalPlay();
     renderMenu();
     renderStats();
@@ -256,15 +515,111 @@ weatherCity.addEventListener("change", function () {
     updateWeather(weatherCity.value);
 });
 
-/* 模拟后端接口：使用 server.js 启动时会读取接口，直接打开页面时使用本地数据 */
-fetch("/api/dashboard")
-    .then(function (res) {
-        return res.ok ? res.json() : appData;
-    })
-    .then(initDashboard)
-    .catch(function () {
-        initDashboard(appData);
+menuList.addEventListener("click", function (event) {
+    const item = event.target.closest("li[data-href]");
+    if (item && item.dataset.alert) {
+        event.preventDefault();
+        alert(item.dataset.alert);
+        return;
+    }
+    if (item && item.dataset.href) {
+        location.href = item.dataset.href;
+    }
+});
+
+eventTable.addEventListener("click", function (event) {
+    const link = event.target.closest(".detail-link");
+    if (!link) {
+        return;
+    }
+    event.preventDefault();
+    openImageModal(link.dataset.image);
+});
+
+eventTable.addEventListener("change", function (event) {
+    const select = event.target.closest(".state-select");
+    if (!select) {
+        return;
+    }
+    select.className = "state state-select " + stateClassName(select.value);
+    updateEventState(select.dataset.id, select.value, select);
+});
+
+if (toggleAllEvents) {
+    toggleAllEvents.addEventListener("click", function (event) {
+        event.preventDefault();
+        showingAllEvents = !showingAllEvents;
+        toggleAllEvents.innerText = showingAllEvents ? "收起" : "查看更多";
+        if (showingAllEvents) {
+            allEventsPage = 1;
+            loadAllEvents();
+        } else {
+            renderEvents();
+        }
     });
+}
+
+if (eventPagination) {
+    eventPagination.addEventListener("click", function (event) {
+        const button = event.target.closest("button[data-page]");
+        if (!button || button.disabled) {
+            return;
+        }
+
+        const totalPages = Math.max(1, Math.ceil(allEventItems.length / allEventsPageSize));
+        if (button.dataset.page === "prev") {
+            allEventsPage -= 1;
+        } else if (button.dataset.page === "next") {
+            allEventsPage += 1;
+        } else {
+            allEventsPage = Number(button.dataset.page);
+        }
+
+        allEventsPage = Math.min(Math.max(1, allEventsPage), totalPages);
+        renderEvents();
+    });
+}
+
+if (imageModalMask) {
+    imageModalMask.addEventListener("click", closeImageModal);
+}
+
+if (imageModalClose) {
+    imageModalClose.addEventListener("click", closeImageModal);
+}
+
+document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") {
+        closeImageModal();
+    }
+});
+
+/* Node.js JSON 数据接口 */
+const API_BASE = location.port === "5500" ? "" : "http://127.0.0.1:5500";
+
+function refreshDashboard() {
+    fetch(API_BASE + "/api/dashboard?ts=" + Date.now())
+        .then(function (res) {
+            if (!res.ok) {
+                throw new Error("dashboard api error");
+            }
+            return res.json();
+        })
+        .then(initDashboard)
+        .then(function () {
+            if (showingAllEvents) {
+                loadAllEvents();
+            }
+        })
+        .catch(function () {
+            if (!dashboardData || dashboardData === EMPTY_DASHBOARD) {
+                initDashboard(EMPTY_DASHBOARD);
+            }
+        });
+}
+
+refreshDashboard();
+setInterval(refreshDashboard, 3000);
 
 updateWeather(weatherCity.value);
 updateClock();

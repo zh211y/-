@@ -41,7 +41,6 @@
                     <span id="weatherDesc">实时天气加载中</span>
                 </div>
                 <div class="clock" id="clockText">--</div>
-                <button class="bell" title="预警消息"><span class="iconfont icon-xiaoxi"></span><i>12</i></button>
                 <img class="avatar" src="./uploads/首页图片.jpg" alt="">
                 <div class="admin-wrap">
                     <button class="admin" id="adminBtn"><span class="iconfont icon-shezhi"></span><span id="adminName">管理员</span></button>
@@ -94,7 +93,7 @@
                     <section class="panel event-panel">
                         <div class="panel-hd">
                             <h3>最近预警事件</h3>
-                            <a href="#">查看更多</a>
+                            <a href="#" id="toggleAllEvents">查看更多</a>
                         </div>
                         <table>
                             <thead>
@@ -110,6 +109,7 @@
                             </thead>
                             <tbody id="eventTable"></tbody>
                         </table>
+                        <div class="event-pagination hide" id="eventPagination"></div>
                     </section>
 
                     <!-- 右侧信息栏 -->
@@ -120,7 +120,7 @@
                                 <a href="#">查看更多</a>
                             </div>
                             <div class="chart-row">
-                                <div class="donut"><span>102<em>总预警</em></span></div>
+                                <div class="donut"><span id="warningTotal">0<em>总预警</em></span></div>
                                 <ul class="legend" id="legendList"></ul>
                             </div>
                         </div>
@@ -156,7 +156,15 @@
         </div>
     </div>
 
-    <script src="./js/data.js"></script>
+    <div class="image-modal hide" id="imageModal">
+        <div class="image-modal-mask" id="imageModalMask"></div>
+        <div class="image-modal-body">
+            <button type="button" class="image-modal-close" id="imageModalClose">×</button>
+            <img id="imageModalImg" src="" alt="检测截图">
+        </div>
+    </div>
+
+    <script src="./js/animal-atlas.js"></script>
     <script src="./js/main.js"></script>
 </body>
 </html>

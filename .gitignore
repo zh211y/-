@@ -1,3 +1,10 @@
 dist/
 node_modules/
 .wrangler/
+__pycache__/
+*.pyc
+*.pt
+yolo_server*.log
+runs/
+datasets/
+models/

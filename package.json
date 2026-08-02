@@ -4,6 +4,7 @@
   "private": true,
   "description": "Static frontend for the traffic competition admin system.",
   "scripts": {
+    "start": "node server.js",
     "build": "node scripts/build-static.js"
   },
   "engines": {

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实时监控 - WildGuard 智护平台</title>
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/detect.css">
+</head>
+<body>
+    <main class="monitor-page">
+        <header class="monitor-header">
+            <div class="brand">
+                <img src="./images/民大校徽.svg" alt="">
+                <div>
+                    <p>WildGuard</p>
+                    <h1>实时监控</h1>
+                </div>
+            </div>
+            <a class="back-link" href="./index.html">返回后台首页</a>
+        </header>
+
+        <section class="monitor-layout monitor-layout-single">
+            <div class="video-panel">
+                <div class="video-toolbar">
+                    <div>
+                        <strong id="modelText">实时监控未连接</strong>
+                        <span id="statusText">等待实时检测同步</span>
+                    </div>
+                    <div class="live-badge" id="liveBadge">
+                        <i></i>
+                        <span>检测状态</span>
+                    </div>
+                </div>
+
+                <div class="preview">
+                    <img id="resultImage" alt="YOLO 实时预测画面">
+                    <div id="emptyState">
+                        <b>未连接实时检测</b>
+                        <span>启动实时检测后，预测画面会显示在这里。</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <input id="cameraInput" type="number" min="0" value="0" hidden>
+    <button id="startCameraBtn" type="button" hidden></button>
+    <button id="stopCameraBtn" type="button" hidden></button>
+    <ul id="detectList" hidden></ul>
+
+    <script src="./js/detect.js"></script>
+</body>
+</html>
