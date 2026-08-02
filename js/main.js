@@ -594,8 +594,12 @@ document.addEventListener("keydown", function (event) {
     }
 });
 
-/* Node.js JSON 数据接口 */
-const API_BASE = location.port === "5500" ? "" : "http://127.0.0.1:5500";
+/* 数据接口：线上走 Cloudflare Functions，本地调试走 Node.js */
+const isHttpPage = location.protocol === "http:" || location.protocol === "https:";
+const isLocalPage = location.hostname === "127.0.0.1" || location.hostname === "localhost";
+const API_BASE = isHttpPage && !isLocalPage
+    ? ""
+    : (location.port === "5500" ? "" : "http://127.0.0.1:5500");
 
 function refreshDashboard() {
     fetch(API_BASE + "/api/dashboard?ts=" + Date.now())
