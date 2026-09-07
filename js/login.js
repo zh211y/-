@@ -7,6 +7,41 @@ const deviceLogin = document.querySelector("#deviceLogin");
 const forgotPassword = document.querySelector("#forgotPassword");
 const rememberMe = document.querySelector("#rememberMe");
 const loginError = document.querySelector("#loginError");
+const loginPage = document.querySelector("#loginPage");
+const loginCard = document.querySelector("#loginCard");
+const openLogin = document.querySelector("#openLogin");
+const closeLogin = document.querySelector("#closeLogin");
+const entryScene = document.querySelector("#entryScene");
+let focusTimer;
+
+function setLoginOpen(isOpen) {
+    clearTimeout(focusTimer);
+    loginPage.classList.toggle("is-login-open", isOpen);
+    loginCard.inert = !isOpen;
+    loginCard.setAttribute("aria-hidden", String(!isOpen));
+    openLogin.setAttribute("aria-expanded", String(isOpen));
+    if (isOpen) {
+        closeLogin.focus({ preventScroll: true });
+        entryScene.inert = true;
+        focusTimer = setTimeout(() => {
+            (username.value ? password : username).focus({ preventScroll: true });
+            if (matchMedia("(max-width: 760px)").matches) {
+                loginCard.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth", block: "center" });
+            }
+        }, matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 650);
+    } else {
+        entryScene.inert = false;
+        openLogin.focus({ preventScroll: true });
+    }
+}
+
+openLogin.addEventListener("click", () => setLoginOpen(true));
+closeLogin.addEventListener("click", () => setLoginOpen(false));
+document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && loginPage.classList.contains("is-login-open")) {
+        setLoginOpen(false);
+    }
+});
 
 const validUsers = [
     {
@@ -72,6 +107,8 @@ forgotPassword.addEventListener("click", function (e) {
 
 togglePassword.addEventListener("click", function () {
     password.type = password.type === "password" ? "text" : "password";
+    togglePassword.setAttribute("aria-label", password.type === "password" ? "显示密码" : "隐藏密码");
+    togglePassword.setAttribute("aria-pressed", String(password.type === "text"));
 });
 
 const rememberedUser = localStorage.getItem("rememberUser");
