@@ -1,0 +1,16 @@
+{
+  "id": "5231216",
+  "name": "e",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "40636659",
+      "name": "长箭头-copy",
+      "font_class": "bottom-arrow-solid",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    }
+  ]
+}

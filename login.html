@@ -6,6 +6,9 @@
     <meta name="theme-color" content="#061310">
     <title>登录 · WildGuard 智护平台</title>
     <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./登录页按钮箭头矢量图/iconfont.css">
+    <link rel="stylesheet" href="./登录页左侧矢量图/iconfont.css">
+    <link rel="stylesheet" href="./密码隐藏矢量图/iconfont.css">
     <link rel="stylesheet" href="./css/login.css">
 </head>
 <body>
@@ -29,30 +32,30 @@
                     <div class="orbit orbit-one" aria-hidden="true"></div><div class="orbit orbit-two" aria-hidden="true"></div><div class="orbit orbit-three" aria-hidden="true"></div>
                     <div class="entry-content">
                         <span class="entry-kicker">守护，从这里开始</span>
-                        <button class="login-trigger" id="openLogin" type="button" aria-expanded="false" aria-controls="loginCard"><span class="trigger-dot" aria-hidden="true"></span><span>登录</span><span class="trigger-arrow" aria-hidden="true">↗</span></button>
+                        <button class="login-trigger" id="openLogin" type="button" aria-expanded="false" aria-controls="loginCard"><span class="trigger-dot" aria-hidden="true"></span> <span>登录</span><span class="iconfont icon-denglu trigger-arrow" aria-hidden="true"></span><span class="iconfont icon-bottom-arrow-solid"></span></button>
                         <p class="entry-caption">进入 WildGuard 智护平台</p>
                     </div>
-                    <span class="orbit-label" aria-hidden="true">CONNECTED TO NATURE</span>
+                    <span class="orbit-label" aria-hidden="true"></span>
                 </div>
                 <section class="login-card" id="loginCard" aria-labelledby="loginTitle" aria-hidden="true" inert>
-                    <button type="button" class="close-card" id="closeLogin" aria-label="收起登录卡片">×</button>
+                    <button type="button" class="close-card" id="closeLogin" aria-label="收起登录卡片"></button>
                     <div class="card-heading"><span class="card-eyebrow">WELCOME BACK</span><h3 id="loginTitle">欢迎回来<span>。</span></h3><p>登录 WildGuard 智护平台</p></div>
                     <form id="loginForm" novalidate>
                         <label class="field-label" for="username">账号</label>
-                        <div class="input-box"><input type="text" id="username" placeholder="请输入账号" autocomplete="username" aria-describedby="loginError"></div>
+                        <div class="input-box"><span class="iconfont icon-denglu field-icon" aria-hidden="true"></span><input type="text" id="username" placeholder="请输入账号" autocomplete="username" aria-describedby="loginError"></div>
                         <label class="field-label" for="password">密码</label>
-                        <div class="input-box"><input type="password" id="password" placeholder="请输入密码" autocomplete="current-password" aria-describedby="loginError"><button type="button" class="icon-btn" id="togglePassword" aria-label="显示密码" aria-pressed="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
+                        <div class="input-box"><span class="iconfont icon-suo field-icon" aria-hidden="true"></span><input type="password" id="password" placeholder="请输入密码" autocomplete="current-password" aria-describedby="loginError"><button type="button" class="icon-btn" id="togglePassword" aria-label="显示密码" aria-pressed="false"><span class="iconfont icon-yanjing" aria-hidden="true"></span></button></div>
                         <p class="login-error" id="loginError" role="status" aria-live="polite"></p>
                         <div class="form-row"><label><input type="checkbox" id="rememberMe" checked> 记住我</label><a href="#" id="forgotPassword">忘记密码？</a></div>
-                        <button type="submit" class="login-btn">登录<span aria-hidden="true">→</span></button>
+                        <button type="submit" class="login-btn">登录<span class="iconfont icon-denglu" aria-hidden="true"></span></button>
                     </form>
                     <div class="other-login"><span>其他登录方式</span></div>
-                    <button type="button" class="device-login" id="deviceLogin">民大学号登录<span aria-hidden="true">↗</span></button>
-                    <p class="card-footnote"><span aria-hidden="true">◇</span> 连接智慧交通，守护自然共生</p>
+                    <button type="button" class="device-login" id="deviceLogin">民大学号登录<span class="iconfont icon-denglu" aria-hidden="true"></span></button>
+                    <p class="card-footnote"><span aria-hidden="true">+</span> 连接智慧交通，守护自然共生</p>
                 </section>
             </section>
         </main>
-        <footer class="login-footer"><span>守护野生动物 <b>·</b> 保障行车与行人安全</span><span>WildGuard <span class="footer-muted">智护平台 / 01</span></span></footer>
+        <footer class="login-footer"><span>守护野生动物 <b>·</b> 保障行车与行人安全</span><span>WildGuard <span class="footer-muted">智护平台 /1.0 </span></span></footer>
     </div>
     <script src="./js/login.js"></script>
 </body>
